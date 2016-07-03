@@ -3,3 +3,6 @@
 ################################################################################
 
 /BinaryClient/bin/Debug
+/BinaryClient/obj/Debug
+/.vs/BinaryClient/v14
+/packages/Newtonsoft.Json.9.0.1
