@@ -4,6 +4,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BinaryClient.JSONTypes;
 
 namespace BinaryClient
 {
@@ -12,9 +13,16 @@ namespace BinaryClient
         private readonly ClientWebSocket _ws = new ClientWebSocket();
         private readonly Uri _uri = new Uri("wss://ws.binaryws.com/websockets/v3");
 
+        public async Task<string> Authorize(string key)
+        {
+            await Connect();
+            SendRequest($"{{\"authorize\":\"{key}\"}}").Wait();
+            var jsonAuth = await StartListen();
+            return jsonAuth;
+        }
+
         public async Task SendRequest(string data)
         {
-
             while (_ws.State == WebSocketState.Connecting) { };
             if (_ws.State != WebSocketState.Open)
             {

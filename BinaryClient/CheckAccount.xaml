@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="CheckAccount" Height="340" Width="300">
+        Title="CheckAccount" Height="350" Width="300">
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
             <RowDefinition Height="350"/>
         </Grid.RowDefinitions>
         <Rectangle Grid.Row="0" Fill="#333333" />
-        <Rectangle Grid.Row="1" Fill="#252525" Margin="0,0,-0.4,120.4" />
+        <Rectangle Grid.Row="1" Fill="#252525" Margin="0,0,-0.4,109.4" />
         <Label Grid.Row="0" x:Name="Label" Content="CHECK ACCOUNT INFORMATION" HorizontalAlignment="Center" Margin="39,10,38.6,0" VerticalAlignment="Top" FontFamily="{DynamicResource {x:Static SystemFonts.IconFontFamilyKey}}" FontSize="14" Foreground="#FEFEFE" Height="29" Width="216"/>
         <TextBox Grid.Row="0" x:Name="TextKey" HorizontalAlignment="Left" Height="23" Margin="39,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Grid.Row="0" x:Name="ButtonCheck" Content="Check" HorizontalAlignment="Left" Margin="180,44,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Background="#FF006FB6" Foreground="#FEFEFE" Height="19"/>
@@ -27,6 +27,8 @@
                 <DataGridTextColumn Binding="{Binding Path=Value}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="ButtonCopy" Content="Copy" HorizontalAlignment="Center" Margin="113,195,105.6,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,0.375" Background="#FF252525" Foreground="#FEFEFE"/>
+        <Button x:Name="ButtonCopy" Content="Copy" HorizontalAlignment="Center" Margin="24,197,194.6,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,0.375" Background="#FF252525" Foreground="#FEFEFE"/>
+        <Label x:Name="labelTime" Content="Time" HorizontalAlignment="Left" Margin="115,193,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="#FEFEFE"/>
+        <TextBox x:Name="textTime" HorizontalAlignment="Left" Height="23" Margin="155,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
     </Grid>
 </Window>
