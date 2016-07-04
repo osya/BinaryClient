@@ -28,7 +28,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="ButtonCopy" Content="Copy" HorizontalAlignment="Center" Margin="24,197,194.6,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.051,0.375" Background="#FF252525" Foreground="#FEFEFE"/>
-        <Label x:Name="labelTime" Content="Time" HorizontalAlignment="Left" Margin="115,193,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="#FEFEFE"/>
-        <TextBox x:Name="textTime" HorizontalAlignment="Left" Height="23" Margin="155,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="labelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="115,193,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="#FEFEFE"/>
+        <TextBox x:Name="textTime" HorizontalAlignment="Left" Height="23" Margin="173,197,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Grid.Row="1"/>
     </Grid>
 </Window>

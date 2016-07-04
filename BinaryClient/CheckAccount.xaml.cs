@@ -76,7 +76,7 @@ namespace BinaryClient
             DataGrid1.ItemsSource = list;
 
             _watch.Stop();
-            textTime.Text = _watch.Elapsed.ToString();
+            textTime.Text = _watch.ElapsedMilliseconds.ToString();
         }
     }
 }

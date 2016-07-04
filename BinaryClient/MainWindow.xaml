@@ -3,26 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BinaryClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="382.8" Width="525">
-    <Grid Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-        <Button x:Name="buttonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,198,0,0" VerticalAlignment="Top" Width="75" Click="buttonCall_Click"/>
-        <Button x:Name="buttonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,249,0,0" VerticalAlignment="Top" Width="75" Click="buttonPut_Click"/>
-        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="63,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonAdd_Click"/>
-        <Button x:Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="167,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonRemove_Click"/>
-        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" Margin="281,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonUpdate_Click"/>
+    <Grid Background="#FF333333">
+        <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,181,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
+        <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
+        <Button x:Name="ButtonAdd" Content="Add" HorizontalAlignment="Left" Margin="63,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonAdd_Click"/>
+        <Button x:Name="ButtonRemove" Content="Remove" HorizontalAlignment="Left" Margin="167,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonRemove_Click"/>
+        <Button x:Name="ButtonUpdate" Content="Update" HorizontalAlignment="Left" Margin="281,23,0,0" VerticalAlignment="Top" Width="75" Click="buttonUpdate_Click"/>
         <Grid HorizontalAlignment="Left" Height="77" Margin="38,64,0,0" VerticalAlignment="Top" Width="449"/>
-        <ComboBox x:Name="comboMarket" HorizontalAlignment="Left" Margin="38,181,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboUnderly" HorizontalAlignment="Left" Margin="189,181,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboStart" HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="47"/>
-        <ComboBox x:Name="comboTimeUnit" HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboPayout" HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboCurrency" HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="45"/>
-
+        <ComboBox x:Name="ComboMarket" HorizontalAlignment="Left" Margin="38,181,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboUnderly" HorizontalAlignment="Left" Margin="189,181,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboStart" HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
+        <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="47"/>
+        <ComboBox x:Name="ComboTimeUnit" HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboPayout" HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboCurrency" HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="45"/>
+        <Label x:Name="labelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
+        <TextBox x:Name="textTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
     </Grid>
 </Window>
