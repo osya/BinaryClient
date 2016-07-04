@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BinaryClient.JSONTypes;
+using Newtonsoft.Json;
 
 namespace BinaryClient
 {
@@ -13,12 +14,12 @@ namespace BinaryClient
         private readonly ClientWebSocket _ws = new ClientWebSocket();
         private readonly Uri _uri = new Uri("wss://ws.binaryws.com/websockets/v3");
 
-        public async Task<string> Authorize(string key)
+        public async Task<Auth> Authorize(string key)
         {
             await Connect();
             SendRequest($"{{\"authorize\":\"{key}\"}}").Wait();
             var jsonAuth = await StartListen();
-            return jsonAuth;
+            return JsonConvert.DeserializeObject<Auth>(jsonAuth);
         }
 
         public async Task SendRequest(string data)
@@ -36,12 +37,6 @@ namespace BinaryClient
                 WebSocketMessageType.Text,
                 true,
                 CancellationToken.None);
-
-            Console.WriteLine("The request has been sent: ");
-            Console.WriteLine(data);
-            Console.WriteLine("\r\n \r\n");
-
-
         }
 
         public async Task<string> StartListen()

@@ -43,9 +43,8 @@ namespace BinaryClient
             _watch.Start();
 
             _status["Key"] = TextKey.Text;
-            var jsonAuth = await _bws.Authorize(TextKey.Text);
+            var auth = await _bws.Authorize(TextKey.Text);
 
-            var auth = JsonConvert.DeserializeObject<Auth>(jsonAuth);
             await _bws.SendRequest($"{{\"get_settings\":\"1\"}}");
             var jsonSettings = await _bws.StartListen();
             var settings = JsonConvert.DeserializeObject<Settings>(jsonSettings);

@@ -38,6 +38,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"/>
                 <DataGridTextColumn Header="Key" Binding="{Binding Path=Key}" Width="0.5*"/>
             </DataGrid.Columns>
         </DataGrid>
