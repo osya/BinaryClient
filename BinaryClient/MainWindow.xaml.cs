@@ -22,10 +22,10 @@ namespace BinaryClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         readonly Stopwatch _watch = new Stopwatch();
-        public ObservableCollection<Account> Accounts { get; } = new ObservableCollection<Account>();
+        public Accounts Accounts { get; } = new Accounts();
 
         private void CheckBox_Checked (object sender, RoutedEventArgs e)
         {
@@ -45,10 +45,7 @@ namespace BinaryClient
 
         public MainWindow()
         {
-            Accounts.Add(new Account("3EjSVBls8OS4NqJ"));
-            
             InitializeComponent();
-
             DataAccounts.ItemsSource = Accounts;
         }
 

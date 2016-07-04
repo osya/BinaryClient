@@ -32,14 +32,15 @@
                     <DataGridTemplateColumn.Header>
                         <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                     </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate >
+                    <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding Selected}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"/>
-                <DataGridTextColumn Header="Key" Binding="{Binding Path=Key}" Width="0.5*"/>
+                <DataGridTextColumn Header="Key" Binding="{Binding Path=Key, 
+                    UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="LabelSelected" Content="Selected: " HorizontalAlignment="Left" Margin="44,153,0,0" VerticalAlignment="Top" 
