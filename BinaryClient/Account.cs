@@ -22,6 +22,8 @@ namespace BinaryClient
     {
         private string _key;
         private string _username;
+        private string _name;
+        private string _balance;
         private bool _selected;
         private Auth _auth;
         public BinaryWs Bws { get; } = new BinaryWs();
@@ -44,6 +46,17 @@ namespace BinaryClient
             }
         }
 
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value == _name) return;
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
         public string Key {
             get { return _key; }
             set
@@ -55,6 +68,17 @@ namespace BinaryClient
                     _auth = Task.Run(() => Bws.Authorize(_key)).Result;
                 }
                 OnPropertyChanged("Key");
+            }
+        }
+
+        public string Balance
+        {
+            get { return _balance; }
+            set
+            {
+                if (value == _balance) return;
+                _balance = value;
+                OnPropertyChanged("Balance");
             }
         }
 
@@ -88,6 +112,10 @@ namespace BinaryClient
                 else
                 {
                     Username = _auth.authorize.loginid;
+                    Name = _auth.authorize.fullname;
+                    Balance = "USD" == _auth.authorize.currency
+                        ? $"${_auth.authorize.balance}"
+                        : _auth.authorize.balance;
                 }
                 return errorMessage;
             }

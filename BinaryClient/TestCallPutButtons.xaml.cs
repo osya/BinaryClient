@@ -20,7 +20,7 @@ namespace BinaryClient
     /// <summary>
     /// Interaction logic for TestCallPutButtons.xaml
     /// </summary>
-    public partial class TestCallPutButtons : Window
+    public partial class TestCallPutButtons
     {
         const string Key = "3EjSVBls8OS4NqJ";
         readonly BinaryWs _bws = new BinaryWs();

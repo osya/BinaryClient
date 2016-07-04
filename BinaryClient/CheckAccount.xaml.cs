@@ -25,7 +25,7 @@ namespace BinaryClient
     /// <summary>
     /// Interaction logic for CheckAccount.xaml
     /// </summary>
-    public partial class CheckAccount : Window
+    public partial class CheckAccount
     {
         private readonly Dictionary<string, string> _status = new Dictionary<string, string>();
         private static Logger _logger = LogManager.GetCurrentClassLogger();
