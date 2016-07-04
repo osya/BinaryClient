@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Account.cs" />
     <Compile Include="JSONTypes\Portfolio.cs" />
     <Compile Include="JSONTypes\PriceProposal.cs" />
     <Compile Include="TestCallPutButtons.xaml.cs">
