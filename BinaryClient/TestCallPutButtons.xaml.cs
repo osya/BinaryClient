@@ -28,6 +28,7 @@ namespace BinaryClient
 
         public TestCallPutButtons()
         {
+            Task.Run(() => _bws.Connect()).Wait();
             Task.Run(() => _bws.Authorize(Key)).Wait();
 
             InitializeComponent();

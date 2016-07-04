@@ -35,6 +35,7 @@ namespace BinaryClient
         public CheckAccount()
         {
             InitializeComponent();
+            Task.Run(() => _bws.Connect()).Wait();
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)

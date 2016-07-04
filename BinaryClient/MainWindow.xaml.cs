@@ -56,12 +56,17 @@ namespace BinaryClient
 
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
-
+            Accounts.Remove(acc => acc.Selected);
+            // TODO: Investigate how to update labelSelected on some event during deletin account
+            LabelSelected.Content = $"Selected: {Accounts.Count(m => m.Selected)}";
         }
 
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            foreach (var acc in Accounts)
+            {
+                acc.Key = acc.Key;
+            }
         }
 
         private async void buttonPut_Click(object sender, RoutedEventArgs e)

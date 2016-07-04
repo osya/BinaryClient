@@ -16,7 +16,6 @@ namespace BinaryClient
 
         public async Task<Auth> Authorize(string key)
         {
-            await Connect();
             SendRequest($"{{\"authorize\":\"{key}\"}}").Wait();
             var jsonAuth = await StartListen();
             return JsonConvert.DeserializeObject<Auth>(jsonAuth);

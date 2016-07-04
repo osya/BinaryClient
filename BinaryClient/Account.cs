@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,7 +62,7 @@ namespace BinaryClient
             get { return _key; }
             set
             {
-                if (value == _key) return;
+                // There is no condtion if (value == _key) return; to be able to refresh accounts via reassigning key
                 _key = value;
                 if (!string.IsNullOrEmpty(value))
                 {
@@ -86,9 +87,10 @@ namespace BinaryClient
         {
             _auth = null;
             Key = string.Empty;
+            Task.Run(() => Bws.Connect()).Wait();
         }
 
-        public Account(string key)
+        public Account(string key): this()
         {
             Key = key;
         }
