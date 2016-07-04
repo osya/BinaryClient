@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BinaryClient;
+using BinaryClient.JSONTypes;
 
 namespace BinaryClient
 {
@@ -22,6 +23,7 @@ namespace BinaryClient
         private string _key;
         private string _username;
         private bool _selected;
+        private Auth _auth;
         public BinaryWs Bws { get; } = new BinaryWs();
         public bool Selected {
             get { return _selected; }
@@ -48,12 +50,17 @@ namespace BinaryClient
             {
                 if (value == _key) return;
                 _key = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _auth = Task.Run(() => Bws.Authorize(_key)).Result;
+                }
                 OnPropertyChanged("Key");
             }
         }
 
         public Account()
         {
+            _auth = null;
             Key = string.Empty;
         }
 
@@ -74,16 +81,14 @@ namespace BinaryClient
             {
                 var errorMessage = string.Empty;
                 if (("Key" != columnName) || (string.IsNullOrEmpty(Key))) return errorMessage;
-//                var auth = Task.Run(() => Bws.Authorize(_key)).Result;
-//
-//                if (auth.authorize == null)
-//                {
-//                    errorMessage = "auth.authorize == null";
-//                }
-//                else
-//                {
-//                    Username = auth.authorize.loginid;
-//                }
+                if (_auth.authorize == null)
+                {
+                    errorMessage = "auth.authorize == null";
+                }
+                else
+                {
+                    Username = _auth.authorize.loginid;
+                }
                 return errorMessage;
             }
         }

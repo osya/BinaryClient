@@ -133,7 +133,7 @@ namespace BinaryClient
             _watch.Reset();
         }
 
-        private void DataGrid_TargetUpdated(object sender, DataTransferEventArgs e)
+        private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
         {
             LabelSelected.Content = $"Selected: {Accounts.Count(m => m.Selected)}";
         }
