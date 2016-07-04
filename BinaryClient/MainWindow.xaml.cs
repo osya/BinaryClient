@@ -25,14 +25,30 @@ namespace BinaryClient
     public partial class MainWindow : Window
     {
         readonly Stopwatch _watch = new Stopwatch();
-        //        public List<Account> Accounts { get; } = new List<Account>();
         public ObservableCollection<Account> Accounts { get; } = new ObservableCollection<Account>();
+
+        private void CheckBox_Checked (object sender, RoutedEventArgs e)
+        {
+            foreach (var acc in Accounts.Where(acc => !acc.Selected))
+            {
+                acc.Selected = true;
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (var acc in Accounts.Where(acc => acc.Selected))
+            {
+                acc.Selected = false;
+            }
+        }
 
         public MainWindow()
         {
+            Accounts.Add(new Account("3EjSVBls8OS4NqJ"));
+            
             InitializeComponent();
 
-            Accounts.Add(new Account("3EjSVBls8OS4NqJ"));
             DataAccounts.ItemsSource = Accounts;
         }
 
@@ -82,6 +98,7 @@ namespace BinaryClient
 
             _watch.Stop();
             TextTime.Text = _watch.ElapsedMilliseconds.ToString();
+            _watch.Reset();
         }
 
         private async void buttonCall_Click(object sender, RoutedEventArgs e)
@@ -116,6 +133,7 @@ namespace BinaryClient
 
             _watch.Stop();
             TextTime.Text = _watch.ElapsedMilliseconds.ToString();
+            _watch.Reset();
         }
 
         private void DataGrid_TargetUpdated(object sender, DataTransferEventArgs e)

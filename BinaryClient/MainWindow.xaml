@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:BinaryClient.Properties"
         mc:Ignorable="d"
         Title="MainWindow" Height="382.8" Width="525">
     <Grid Background="#FF333333">
@@ -24,9 +25,18 @@
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
         <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="42,56,42.4,0" VerticalAlignment="Top" 
                   Height="84" Width="434" CanUserAddRows="true" TargetUpdated="DataGrid_TargetUpdated" AutoGenerateColumns="False">
-            <DataGrid.Columns >
-                <DataGridCheckBoxColumn Binding="{Binding Path=Selected, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Binding="{Binding Path=Key}" Width="0.5*"/>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Selected}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Key" Binding="{Binding Path=Key}" Width="0.5*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="LabelSelected" Content="Selected: " HorizontalAlignment="Left" Margin="44,153,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>

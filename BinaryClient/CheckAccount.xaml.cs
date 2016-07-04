@@ -77,6 +77,7 @@ namespace BinaryClient
 
             _watch.Stop();
             textTime.Text = _watch.ElapsedMilliseconds.ToString();
+            _watch.Reset();
         }
     }
 }

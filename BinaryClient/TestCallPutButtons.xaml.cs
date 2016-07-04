@@ -28,9 +28,9 @@ namespace BinaryClient
 
         public TestCallPutButtons()
         {
-            InitializeComponent();
+            Task.Run(() => _bws.Authorize(Key)).Wait();
 
-            Task.Run(() => this._bws.Authorize(Key)).Wait();
+            InitializeComponent();
         }
 
         private async void buttonCall_Click(object sender, RoutedEventArgs e)
@@ -91,6 +91,7 @@ namespace BinaryClient
 
             _watch.Stop();
             textTime.Text = _watch.ElapsedMilliseconds.ToString();
+            _watch.Reset();
         }
     }
 }
