@@ -51,61 +51,68 @@ namespace BinaryClient
 
         }
 
-        private void buttonPut_Click(object sender, RoutedEventArgs e)
+        private async void buttonPut_Click(object sender, RoutedEventArgs e)
         {
             TextTime.Text = "";
             _watch.Start();
 
-//            var priceProposalRequest = new PriceProposalRequest
-//            {
-//                proposal = 1,
-//                amount = "100",
-//                basis = "payout",
-//                contract_type = "PUT",
-//                currency = "USD",
-//                duration = "60",
-//                duration_unit = "s",
-//                symbol = "R_100"
-//            };
-//            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
-//            await _bws.SendRequest(jsonPriceProposalRequest);
-//            var jsonPriceProposalResponse = await _bws.StartListen();
-//            var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
-//            var id = priceProposal.proposal.id;
-//            var price = priceProposal.proposal.display_value;
-//
-//            await _bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
-//            var jsonBuy = await _bws.StartListen();
+            var priceProposalRequest = new PriceProposalRequest
+            {
+                proposal = 1,
+                amount = "100",
+                basis = "payout",
+                contract_type = "PUT",
+                currency = "USD",
+                duration = "60",
+                duration_unit = "s",
+                symbol = "R_100"
+            };
+            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
+            foreach (var acc in Accounts.Where(m => m.Selected))
+            {
+                await acc.Bws.SendRequest(jsonPriceProposalRequest);
+                var jsonPriceProposalResponse = await acc.Bws.StartListen();
+                var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
+                var id = priceProposal.proposal.id;
+                var price = priceProposal.proposal.display_value;
+                
+                await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
+                var jsonBuy = await acc.Bws.StartListen();
+            }
 
             _watch.Stop();
             TextTime.Text = _watch.ElapsedMilliseconds.ToString();
         }
 
-        private void buttonCall_Click(object sender, RoutedEventArgs e)
+        private async void buttonCall_Click(object sender, RoutedEventArgs e)
         {
             TextTime.Text = "";
             _watch.Start();
 
-//            var priceProposalRequest = new PriceProposalRequest
-//            {
-//                proposal = 1,
-//                amount = "71",
-//                basis = "payout",
-//                contract_type = "CALL",
-//                currency = "USD",
-//                duration = "60",
-//                duration_unit = "s",
-//                symbol = "R_100"
-//            };
-//            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
-//            await _bws.SendRequest(jsonPriceProposalRequest);
-//            var jsonPriceProposalResponse = await _bws.StartListen();
-//            var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
-//            var id = priceProposal.proposal.id;
-//            var price = priceProposal.proposal.display_value;
-//
-//            await _bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
-//            var jsonBuy = await _bws.StartListen();
+            var priceProposalRequest = new PriceProposalRequest
+            {
+                proposal = 1,
+                amount = "100",
+                basis = "payout",
+                contract_type = "CALL",
+                currency = "USD",
+                duration = "60",
+                duration_unit = "s",
+                symbol = "R_100"
+            };
+            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
+
+            foreach (var acc in Accounts.Where(m => m.Selected))
+            {
+                await acc.Bws.SendRequest(jsonPriceProposalRequest);
+                var jsonPriceProposalResponse = await acc.Bws.StartListen();
+                var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
+                var id = priceProposal.proposal.id;
+                var price = priceProposal.proposal.display_value;
+                
+                await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
+                var jsonBuy = await acc.Bws.StartListen();
+            }
 
             _watch.Stop();
             TextTime.Text = _watch.ElapsedMilliseconds.ToString();

@@ -6,7 +6,7 @@ namespace BinaryClient
     public class Account
     {
         private string _key;
-        readonly BinaryWs _bws = new BinaryWs();
+        public BinaryWs Bws { get; } = new BinaryWs();
 
         public bool Selected { get; set; }
         public string Key {
@@ -16,7 +16,7 @@ namespace BinaryClient
                 _key = value;
                 if (!string.IsNullOrEmpty(value))
                 {
-                    Task.Run(() => _bws.Authorize(_key)).Wait();
+                    Task.Run(() => Bws.Authorize(_key)).Wait();
                 }
             }
         }

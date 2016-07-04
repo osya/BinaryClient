@@ -41,7 +41,7 @@ namespace BinaryClient
             var priceProposalRequest = new PriceProposalRequest
             {
                 proposal = 1,
-                amount = "71",
+                amount = "100",
                 basis = "payout",
                 contract_type = "CALL",
                 currency = "USD",
