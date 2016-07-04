@@ -26,7 +26,7 @@
         <Label x:Name="LabelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
         <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="42,56,42.4,0" VerticalAlignment="Top" 
-                  Height="84" Width="434" CanUserAddRows="true" TargetUpdated="DataGrid_TargetUpdated" AutoGenerateColumns="False">
+                  Height="84" Width="434" CanUserAddRows="True" TargetUpdated="DataGrid_TargetUpdated" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
@@ -38,7 +38,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Key" Binding="{Binding Path=Key, 
                     UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
             </DataGrid.Columns>
