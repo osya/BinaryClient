@@ -11,7 +11,7 @@
         <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
         <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="148,23,0,0" VerticalAlignment="Top" Width="75" 
                 Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
-        <Button x:Name="ButtonUpdate" Content="Update" HorizontalAlignment="Left" Margin="262,23,0,0" VerticalAlignment="Top" Width="75" 
+        <Button x:Name="ButtonUpdate" Content="&#x1F503; Update" HorizontalAlignment="Left" Margin="262,23,0,0" VerticalAlignment="Top" Width="75" 
                 Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
         <ComboBox x:Name="ComboMarket" HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboUnderly" HorizontalAlignment="Left" Margin="195,192,0,0" VerticalAlignment="Top" Width="120"/>
