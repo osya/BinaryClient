@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="382.8" Width="525">
     <Grid Background="#FF333333">
+        <Grid.DataContext>
+            <local:Accounts/>
+        </Grid.DataContext>
         <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,181,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
         <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
         <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="304,145,0,0" VerticalAlignment="Top" Width="75" 
@@ -20,7 +23,8 @@
         <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
-        <ComboBox x:Name="ComboTimeUnit" HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboTimeUnit" ItemsSource="{Binding Path=TimeUnitList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="s"
+                  HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboPayout" HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboCurrency" HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Name="Usd" IsSelected="True">USD</ComboBoxItem>
@@ -46,9 +50,6 @@
                 <DataGridTextColumn Header="Key" Binding="{Binding Key, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
                 <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" IsReadOnly="True"/>
             </DataGrid.Columns>
-            <DataGrid.DataContext>
-                <local:Accounts/>
-            </DataGrid.DataContext>
         </DataGrid>
         <Label x:Name="LabelSelected" Content="Selected: " HorizontalAlignment="Left" Margin="38,145,0,0" VerticalAlignment="Top" 
 			Foreground="#ECECEC" Background="#252525"/>

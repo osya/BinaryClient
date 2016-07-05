@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace BinaryClient
         {
             Add(new Account("3EjSVBls8OS4NqJ"));
         }
+
+        public static KeyValuePair<string, string>[] TimeUnitList { get; } = {
+            new KeyValuePair<string, string>("t", "ticks"),
+            new KeyValuePair<string, string>("s", "seconds"),
+            new KeyValuePair<string, string>("m", "minutes"),
+            new KeyValuePair<string, string>("h", "hours"),
+            new KeyValuePair<string, string>("d", "days"),
+        };
     }
 
     public class Account: IDataErrorInfo, INotifyPropertyChanged

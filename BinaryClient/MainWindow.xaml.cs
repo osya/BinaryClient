@@ -82,7 +82,7 @@ namespace BinaryClient
                 contract_type = contractType,
                 currency = ComboCurrency.Text,
                 duration = TextDuration.Text,
-                duration_unit = "s",
+                duration_unit = ComboTimeUnit.SelectedValue.ToString(),
                 symbol = "R_100"
             };
             var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
