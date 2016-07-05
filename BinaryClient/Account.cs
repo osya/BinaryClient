@@ -26,6 +26,11 @@ namespace BinaryClient
             new KeyValuePair<string, string>("h", "hours"),
             new KeyValuePair<string, string>("d", "days"),
         };
+
+        public static KeyValuePair<string, string>[] BasisList { get; } = {
+            new KeyValuePair<string, string>("payout", "Payout"),
+            new KeyValuePair<string, string>("stake", "Stake")
+        };
     }
 
     public class Account: IDataErrorInfo, INotifyPropertyChanged

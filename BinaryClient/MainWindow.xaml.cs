@@ -78,7 +78,7 @@ namespace BinaryClient
             {
                 proposal = 1,
                 amount = TextPayout.Text,
-                basis = "payout",
+                basis = ComboBasis.SelectedValue.ToString(),
                 contract_type = contractType,
                 currency = ComboCurrency.Text,
                 duration = TextDuration.Text,
