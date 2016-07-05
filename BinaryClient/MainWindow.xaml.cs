@@ -77,7 +77,7 @@ namespace BinaryClient
             var priceProposalRequest = new PriceProposalRequest
             {
                 proposal = 1,
-                amount = "100",
+                amount = TextPayout.Text,
                 basis = "payout",
                 contract_type = "PUT",
                 currency = "USD",
@@ -111,7 +111,7 @@ namespace BinaryClient
             var priceProposalRequest = new PriceProposalRequest
             {
                 proposal = 1,
-                amount = "100",
+                amount = TextPayout.Text,
                 basis = "payout",
                 contract_type = "CALL",
                 currency = "USD",
@@ -126,9 +126,10 @@ namespace BinaryClient
                 await acc.Bws.SendRequest(jsonPriceProposalRequest);
                 var jsonPriceProposalResponse = await acc.Bws.StartListen();
                 var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
+                if (priceProposal.proposal == null) continue;
                 var id = priceProposal.proposal.id;
                 var price = priceProposal.proposal.display_value;
-                
+
                 await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
                 var jsonBuy = await acc.Bws.StartListen();
             }
