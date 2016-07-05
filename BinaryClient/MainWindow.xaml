@@ -1,18 +1,19 @@
-﻿<Window x:Class="BinaryClient.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:BinaryClient.Properties"
+        xmlns:local="clr-namespace:BinaryClient" x:Class="BinaryClient.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="382.8" Width="525">
     <Grid Background="#FF333333">
         <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,181,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
         <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
         <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="304,145,0,0" VerticalAlignment="Top" Width="75" 
-                Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
-        <Button x:Name="ButtonUpdate" Content="&#x1F503; Update" HorizontalAlignment="Left" Margin="397,145,0,0" VerticalAlignment="Top" Width="75" 
-                Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
+			Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
+        <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="397,145,0,0" VerticalAlignment="Top" Width="75" 
+			Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
         <ComboBox x:Name="ComboMarket" HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboUnderly" HorizontalAlignment="Left" Margin="195,192,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboStart" HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120"/>
@@ -25,28 +26,29 @@
         <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="LabelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
-        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,10,10.4,0" VerticalAlignment="Top" 
-                  Height="130" Width="498" CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" TargetUpdated="DataGrid_SourceUpdated" AutoGenerateColumns="False">
+        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,10,10.4,0" VerticalAlignment="Top" Height="130" Width="498" 
+                  CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" TargetUpdated="DataGrid_SourceUpdated" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding Selected, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True,
-                                UpdateSourceTrigger=PropertyChanged}"/>
+                            <CheckBox IsChecked="{Binding Selected, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Key" Binding="{Binding Path=Key, 
-                    UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
-                <DataGridTextColumn Header="Balance" Binding="{Binding Path=Balance}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Key" Binding="{Binding Key, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
+                <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <DataGrid.DataContext>
+                <local:Accounts/>
+            </DataGrid.DataContext>
         </DataGrid>
         <Label x:Name="LabelSelected" Content="Selected: " HorizontalAlignment="Left" Margin="38,145,0,0" VerticalAlignment="Top" 
-               Foreground="#ECECEC" Background="#252525"/>
+			Foreground="#ECECEC" Background="#252525"/>
     </Grid>
 </Window>
