@@ -67,6 +67,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="JSONTypes\Portfolio.cs" />
     <Compile Include="JSONTypes\PriceProposal.cs" />
+    <Compile Include="JSONTypes\TradingTimes.cs" />
     <Compile Include="TestCallPutButtons.xaml.cs">
       <DependentUpon>TestCallPutButtons.xaml</DependentUpon>
     </Compile>

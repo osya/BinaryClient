@@ -45,6 +45,7 @@ namespace BinaryClient
 
         public MainWindow()
         {
+            Accounts.Init();
             InitializeComponent();
             DataAccounts.ItemsSource = Accounts;
         }

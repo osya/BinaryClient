@@ -42,7 +42,7 @@ namespace BinaryClient
         {
             while (_ws.State == WebSocketState.Open)
             {
-                var buffer = new ArraySegment<byte>(new byte[1024]);
+                var buffer = new ArraySegment<byte>(new byte[8000]);
                 {
                     var result = await _ws.ReceiveAsync(new ArraySegment<byte>(buffer.Array), CancellationToken.None);
 
@@ -51,7 +51,8 @@ namespace BinaryClient
                         break;
                     }
                     var str = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
-                    return str;
+                    var res = result.EndOfMessage ? str : $"{str}{await StartListen()}";
+                    return res;
                 }
             }
             return "Connection Closed!";

@@ -9,16 +9,14 @@ using System.Windows;
 using System.Windows.Controls;
 using BinaryClient;
 using BinaryClient.JSONTypes;
+using Newtonsoft.Json;
 
 namespace BinaryClient
 {
     public class Accounts : ObservableCollection<Account>
     {
-        public Accounts()
-        {
-            Add(new Account("3EjSVBls8OS4NqJ"));
-        }
-
+        public static BinaryWs Bws { get; } = new BinaryWs();
+        public static List<KeyValuePair<string, string>> MarketList { get; set; } = new List<KeyValuePair<string, string>>();
         public static KeyValuePair<string, string>[] TimeUnitList { get; } = {
             new KeyValuePair<string, string>("t", "ticks"),
             new KeyValuePair<string, string>("s", "seconds"),
@@ -26,11 +24,30 @@ namespace BinaryClient
             new KeyValuePair<string, string>("h", "hours"),
             new KeyValuePair<string, string>("d", "days"),
         };
-
         public static KeyValuePair<string, string>[] BasisList { get; } = {
             new KeyValuePair<string, string>("payout", "Payout"),
             new KeyValuePair<string, string>("stake", "Stake")
         };
+
+        public void Init()
+        {
+            // Open websocket connection to get Market lists for all accounts
+            Task.Run(() => Bws.Connect()).Wait();
+            Task.Run(() => Bws.SendRequest("{\"trading_times\":\"2015-09-14\"}")).Wait();
+            var jsonTradingTimesResponse = Task.Run(() => Bws.StartListen()).Result;
+            var tradingTime = JsonConvert.DeserializeObject<TradingTimesResponse>(jsonTradingTimesResponse);
+
+            foreach (var market in tradingTime.trading_times.markets)
+            {
+                MarketList.Add(new KeyValuePair<string, string>(market.name, market.name));
+                foreach (var submarket in market.submarkets)
+                {
+                    MarketList.Add(new KeyValuePair<string, string>(submarket.name, $"  {submarket.name}"));
+                }
+            }
+
+            Add(new Account("3EjSVBls8OS4NqJ"));
+        }
     }
 
     public class Account: IDataErrorInfo, INotifyPropertyChanged

@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:properties="clr-namespace:BinaryClient.Properties"
-        xmlns:local="clr-namespace:BinaryClient" x:Class="BinaryClient.MainWindow"
+    xmlns:local="clr-namespace:BinaryClient"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    x:Class="BinaryClient.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="382.8" Width="525">
     <Grid Background="#FF333333">
@@ -17,7 +18,8 @@
 			Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
         <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="397,145,0,0" VerticalAlignment="Top" Width="75" 
 			Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
-        <ComboBox x:Name="ComboMarket" HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboMarket" ItemsSource="{Binding Path=MarketList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="Forex"
+                  HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboUnderly" HorizontalAlignment="Left" Margin="195,192,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboStart" HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
