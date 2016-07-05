@@ -80,7 +80,7 @@ namespace BinaryClient
                 amount = TextPayout.Text,
                 basis = "payout",
                 contract_type = "PUT",
-                currency = "USD",
+                currency = ComboCurrency.Text,
                 duration = "60",
                 duration_unit = "s",
                 symbol = "R_100"
@@ -114,7 +114,7 @@ namespace BinaryClient
                 amount = TextPayout.Text,
                 basis = "payout",
                 contract_type = "CALL",
-                currency = "USD",
+                currency = ComboCurrency.Text,
                 duration = "60",
                 duration_unit = "s",
                 symbol = "R_100"
