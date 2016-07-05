@@ -69,7 +69,7 @@ namespace BinaryClient
             }
         }
 
-        private async void buttonPut_Click(object sender, RoutedEventArgs e)
+        private async void Buy(string contractType)
         {
             TextTime.Text = "";
             _watch.Start();
@@ -79,48 +79,13 @@ namespace BinaryClient
                 proposal = 1,
                 amount = TextPayout.Text,
                 basis = "payout",
-                contract_type = "PUT",
+                contract_type = contractType,
                 currency = ComboCurrency.Text,
                 duration = "60",
                 duration_unit = "s",
                 symbol = "R_100"
             };
             var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
-            foreach (var acc in Accounts.Where(m => m.Selected))
-            {
-                await acc.Bws.SendRequest(jsonPriceProposalRequest);
-                var jsonPriceProposalResponse = await acc.Bws.StartListen();
-                var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
-                var id = priceProposal.proposal.id;
-                var price = priceProposal.proposal.display_value;
-                
-                await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
-                var jsonBuy = await acc.Bws.StartListen();
-            }
-
-            _watch.Stop();
-            TextTime.Text = _watch.ElapsedMilliseconds.ToString();
-            _watch.Reset();
-        }
-
-        private async void buttonCall_Click(object sender, RoutedEventArgs e)
-        {
-            TextTime.Text = "";
-            _watch.Start();
-
-            var priceProposalRequest = new PriceProposalRequest
-            {
-                proposal = 1,
-                amount = TextPayout.Text,
-                basis = "payout",
-                contract_type = "CALL",
-                currency = ComboCurrency.Text,
-                duration = "60",
-                duration_unit = "s",
-                symbol = "R_100"
-            };
-            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
-
             foreach (var acc in Accounts.Where(m => m.Selected))
             {
                 await acc.Bws.SendRequest(jsonPriceProposalRequest);
@@ -137,6 +102,16 @@ namespace BinaryClient
             _watch.Stop();
             TextTime.Text = _watch.ElapsedMilliseconds.ToString();
             _watch.Reset();
+        }
+
+        private void buttonPut_Click(object sender, RoutedEventArgs e)
+        {
+            Buy("PUT");
+        }
+
+        private void buttonCall_Click(object sender, RoutedEventArgs e)
+        {
+            Buy("CALL");
         }
 
         private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
