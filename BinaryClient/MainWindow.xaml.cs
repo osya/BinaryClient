@@ -81,7 +81,7 @@ namespace BinaryClient
                 basis = "payout",
                 contract_type = contractType,
                 currency = ComboCurrency.Text,
-                duration = "60",
+                duration = TextDuration.Text,
                 duration_unit = "s",
                 symbol = "R_100"
             };

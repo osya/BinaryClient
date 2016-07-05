@@ -19,13 +19,13 @@
         <ComboBox x:Name="ComboStart" HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
         <ComboBox x:Name="ComboTimeUnit" HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboPayout" HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboCurrency" HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Name="Usd" IsSelected="True">USD</ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="LabelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
         <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,10,10.4,0" VerticalAlignment="Top" Height="130" Width="498" 
