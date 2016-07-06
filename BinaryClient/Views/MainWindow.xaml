@@ -27,7 +27,10 @@
         <ComboBox x:Name="ComboStart" ItemsSource="{Binding Path=StartTimeList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedItem="{Binding Path=SelectedStartTime}"
                   HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
-        <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False">
+            <ComboBoxItem Name="Duration" IsSelected="True">Duration</ComboBoxItem>
+            <ComboBoxItem Name="EndTime">End Time</ComboBoxItem>
+        </ComboBox>
         <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
         <ComboBox x:Name="ComboTimeUnit" ItemsSource="{Binding Path=TimeUnitList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="s"
                   HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
