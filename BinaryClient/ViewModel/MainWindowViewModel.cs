@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,6 +13,8 @@ namespace BinaryClient.ViewModel
 {
     public class MainWindowViewModel: INotifyPropertyChanged
     {
+        public static ObservableCollection<KeyValuePair<int, string>> StartTimeList { get; set; } = new ObservableCollection<KeyValuePair<int, string>>();
+        public KeyValuePair<int, string> SelectedStartTime { get; set; }
         public static Accounts Accounts { get; } = new Accounts();
         public static BinaryWs Bws { get; } = new BinaryWs();
         public static ObservableCollection<MarketSubmarket> MarketList { get; } = new ObservableCollection<MarketSubmarket>();
@@ -62,6 +65,20 @@ namespace BinaryClient.ViewModel
             new KeyValuePair<string, string>("payout", "Payout"),
             new KeyValuePair<string, string>("stake", "Stake")
         };
+
+        public MainWindowViewModel()
+        {
+            var curTime = DateTime.UtcNow;
+            StartTimeList.Add(new KeyValuePair<int, string>(0, "Now"));
+            for (var i = 0; i < 673; i++)
+            {
+                curTime = curTime.AddMinutes(5);
+                var curTimeS = curTime.ToLocalTime().ToString("HH:mm \"GMT\"K, ddd");
+                var unixTimestamp = (int)(curTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                StartTimeList.Add(new KeyValuePair<int, string>(unixTimestamp, curTimeS));
+            }
+            SelectedStartTime = StartTimeList[0];
+        }
 
         public void Init()
         {

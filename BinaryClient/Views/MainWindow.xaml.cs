@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
@@ -70,6 +71,8 @@ namespace BinaryClient.Views
                 duration = TextDuration.Text,
                 duration_unit = ComboTimeUnit.SelectedValue.ToString(),
                 symbol = ViewModel.SelectedSymbol.symbol
+                // TODO: date_start commented cause it should be tested more carefully
+//                date_start = ViewModel.SelectedStartTime.Key !=0 ? ViewModel.SelectedStartTime.Key : (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
             };
             var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
             foreach (var acc in MainWindowViewModel.Accounts.Where(m => m.Selected))
