@@ -16,9 +16,10 @@
     <Grid Background="#FF333333">
         <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,181,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
         <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
-        <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="304,145,0,0" VerticalAlignment="Top" Width="75" 
+        <Button x:Name="ButtonAdd" Content="+ Add" HorizontalAlignment="Left" Margin="107,10,0,0" VerticalAlignment="Top" Width="75" Foreground="#ECECEC" Background="#252525" Click="ButtonAdd_Click"/>
+        <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="211,10,0,0" VerticalAlignment="Top" Width="75" 
 			Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
-        <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="397,145,0,0" VerticalAlignment="Top" Width="75" 
+        <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="322,10,0,0" VerticalAlignment="Top" Width="75" 
 			Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
         <ComboBox x:Name="ComboMarket" ItemsSource="{Binding Path=MarketList}" DisplayMemberPath="name" SelectedValuePath="key" SelectedItem="{Binding Path=SelectedMarket}"
                   HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
@@ -42,8 +43,8 @@
         <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="LabelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67" IsReadOnly="True"/>
-        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,10,10.4,0" VerticalAlignment="Top" Height="130" Width="498" 
-                  CanUserAddRows="True" SourceUpdated="DataGrid_SourceUpdated" TargetUpdated="DataGrid_SourceUpdated" AutoGenerateColumns="False">
+        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,36,10.4,0" VerticalAlignment="Top" Height="104" Width="498" 
+                  CanUserAddRows="False" SourceUpdated="DataGrid_SourceUpdated" TargetUpdated="DataGrid_SourceUpdated" AutoGenerateColumns="False">
             <DataGrid.DataContext>
                 <model:Accounts/>
             </DataGrid.DataContext>

@@ -41,6 +41,11 @@ namespace BinaryClient.Views
             }
         }
 
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowViewModel.Accounts.Add(new Account());
+        }
+
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
             MainWindowViewModel.Accounts.Remove(acc => acc.Selected);

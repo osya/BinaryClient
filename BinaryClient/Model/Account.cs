@@ -89,6 +89,7 @@ namespace BinaryClient.Model
             _auth = null;
             Key = string.Empty;
             Task.Run(() => Bws.Connect()).Wait();
+            Status = "Inactive";
         }
 
         public Account(string key): this()
