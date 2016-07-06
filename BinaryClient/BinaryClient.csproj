@@ -63,19 +63,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Account.cs" />
+    <Compile Include="Model\Account.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="JSONTypes\Portfolio.cs" />
     <Compile Include="JSONTypes\PriceProposal.cs" />
     <Compile Include="JSONTypes\TradingTimes.cs" />
-    <Compile Include="TestCallPutButtons.xaml.cs">
+    <Compile Include="Views\TestCallPutButtons.xaml.cs">
       <DependentUpon>TestCallPutButtons.xaml</DependentUpon>
     </Compile>
-    <Page Include="CheckAccount.xaml">
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Page Include="Views\CheckAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,17 +85,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BinaryWS.cs" />
-    <Compile Include="CheckAccount.xaml.cs">
+    <Compile Include="Views\CheckAccount.xaml.cs">
       <DependentUpon>CheckAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="JSONTypes\Auth.cs" />
     <Compile Include="JSONTypes\Settings.cs" />
     <Compile Include="JSONTypes\Status.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TestCallPutButtons.xaml">
+    <Page Include="Views\TestCallPutButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

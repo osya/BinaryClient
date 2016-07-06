@@ -36,6 +36,29 @@ namespace BinaryClient.JSONTypes
         public Symbol[] symbols { get; set; }
     }
 
+    public class MarketSubmarket
+    {
+        // This class intended to to create flat list for hierarchial list
+        public List<Submarket> submarkets { get; set; } = new List<Submarket>();
+        public string name { get; set; }
+        public string key { get; set; }
+        public Symbol[] symbols { get; set; }
+
+        public MarketSubmarket(Market market)
+        {
+            name = market.name;
+            key = market.name;
+            submarkets = market.submarkets;
+        }
+
+        public MarketSubmarket(Submarket submarket)
+        {
+            name = $"  {submarket.name}";
+            key = submarket.name;
+            symbols = submarket.symbols;
+        }
+    }
+
     public class Symbol
     {
         public string symbol { get; set; }
@@ -43,6 +66,12 @@ namespace BinaryClient.JSONTypes
         public string name { get; set; }
         public string settlement { get; set; }
         public Times times { get; set; }
+
+//        public override bool Equals(object obj)
+//        {
+//            if (!(obj is Symbol)) return false;
+//            return (symbol == ((Symbol)obj).symbol);
+//        }
     }
 
     public class Event

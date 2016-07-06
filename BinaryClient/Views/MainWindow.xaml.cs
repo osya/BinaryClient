@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BinaryClient.JSONTypes;
+using BinaryClient.Model;
+using BinaryClient.ViewModel;
 using Newtonsoft.Json;
 
-namespace BinaryClient
+namespace BinaryClient.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
+        public MainWindowViewModel ViewModel { get; set; } = new MainWindowViewModel();
         readonly Stopwatch _watch = new Stopwatch();
-        public Accounts Accounts { get; } = new Accounts();
 
-        private void CheckBox_Checked (object sender, RoutedEventArgs e)
+        public MainWindow()
         {
-            foreach (var acc in Accounts.Where(acc => !acc.Selected))
+            ViewModel.Init();
+            InitializeComponent();
+            DataAccounts.ItemsSource = MainWindowViewModel.Accounts;
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var acc in MainWindowViewModel.Accounts.Where(acc => !acc.Selected))
             {
                 acc.Selected = true;
             }
@@ -37,34 +34,22 @@ namespace BinaryClient
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            foreach (var acc in Accounts.Where(acc => acc.Selected))
+            foreach (var acc in MainWindowViewModel.Accounts.Where(acc => acc.Selected))
             {
                 acc.Selected = false;
             }
         }
 
-        public MainWindow()
-        {
-            Accounts.Init();
-            InitializeComponent();
-            DataAccounts.ItemsSource = Accounts;
-        }
-
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
-            Accounts.Remove(acc => acc.Selected);
+            MainWindowViewModel.Accounts.Remove(acc => acc.Selected);
             // TODO: Investigate how to update labelSelected on some event during deletin account
-            LabelSelected.Content = $"Selected: {Accounts.Count(m => m.Selected)}";
+            LabelSelected.Content = $"Selected: {MainWindowViewModel.Accounts.Count(m => m.Selected)}";
         }
 
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var acc in Accounts)
+            foreach (var acc in MainWindowViewModel.Accounts)
             {
                 acc.Key = acc.Key;
             }
@@ -84,10 +69,10 @@ namespace BinaryClient
                 currency = ComboCurrency.Text,
                 duration = TextDuration.Text,
                 duration_unit = ComboTimeUnit.SelectedValue.ToString(),
-                symbol = "R_100"
+                symbol = ViewModel.SelectedSymbol.symbol
             };
             var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
-            foreach (var acc in Accounts.Where(m => m.Selected))
+            foreach (var acc in MainWindowViewModel.Accounts.Where(m => m.Selected))
             {
                 await acc.Bws.SendRequest(jsonPriceProposalRequest);
                 var jsonPriceProposalResponse = await acc.Bws.StartListen();
@@ -117,7 +102,7 @@ namespace BinaryClient
 
         private void DataGrid_SourceUpdated(object sender, DataTransferEventArgs e)
         {
-            LabelSelected.Content = $"Selected: {Accounts.Count(m => m.Selected)}";
+            LabelSelected.Content = $"Selected: {MainWindowViewModel.Accounts.Count(m => m.Selected)}";
         }
     }
 }
