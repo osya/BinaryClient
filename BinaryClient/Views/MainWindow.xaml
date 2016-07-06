@@ -61,6 +61,8 @@
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Key" Binding="{Binding Key, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="0.5*"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Opens" Binding="{Binding Opens}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

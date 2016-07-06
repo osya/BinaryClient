@@ -25,6 +25,10 @@ namespace BinaryClient.Model
         private bool _selected;
         private Auth _auth;
         public BinaryWs Bws { get; } = new BinaryWs();
+
+        public string Status { get; set; }
+        public int Opens { get; set; }
+
         public bool Selected {
             get { return _selected; }
             set {
@@ -106,15 +110,29 @@ namespace BinaryClient.Model
                 if (("Key" != columnName) || (string.IsNullOrEmpty(Key))) return errorMessage;
                 if (_auth.authorize == null)
                 {
+                    Status = "Inactive";
+                    OnPropertyChanged("Status");
                     errorMessage = "auth.authorize == null";
                 }
                 else
                 {
+                    Status = "Active";
+                    OnPropertyChanged("Status");
                     Username = _auth.authorize.loginid;
+                    OnPropertyChanged("Username");
                     Name = _auth.authorize.fullname;
+                    OnPropertyChanged("Name");
                     Balance = "USD" == _auth.authorize.currency
                         ? $"${_auth.authorize.balance}"
                         : _auth.authorize.balance;
+                    OnPropertyChanged("Balance");
+
+                    // Request for opens positions
+                    Task.Run(() => Bws.SendRequest($"{{\"portfolio\":1}}")).Wait();
+                    var jsonPortfolio = Task.Run(() => Bws.StartListen()).Result;
+                    var portfolio = JsonConvert.DeserializeObject<PortfolioResponse>(jsonPortfolio);
+                    Opens = portfolio.portfolio.contracts.Length;
+                    OnPropertyChanged("Opens");
                 }
                 return errorMessage;
             }
