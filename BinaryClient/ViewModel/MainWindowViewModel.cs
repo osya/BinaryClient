@@ -119,15 +119,29 @@ namespace BinaryClient.ViewModel
         }
 
         // It is Stake value, which is calculated based on Payout value
-        public string CallDisplayValue;
+        private static string _callDisplayValue;
+        public string CallDisplayValue {
+            get { return _callDisplayValue;}
+            set
+            {
+                _callDisplayValue = value;
+            }
+        }
         public string CallStake => "stake" == SelectedBasis.Key ? BasisValue.ToString(CultureInfo.InvariantCulture) : CallDisplayValue;
 
-        public string PutDisplayValue;
+        private static string _putDisplayValue;
+        public string PutDisplayValue {
+            get { return _putDisplayValue; }
+            set
+            {
+                _putDisplayValue = value;
+            }
+        }
         public string PutStake => "stake" == SelectedBasis.Key ? BasisValue.ToString(CultureInfo.InvariantCulture) : PutDisplayValue;
 
-        private string _callPayout;
+        public string _callPayout;
         public string CallPayout => "payout" == SelectedBasis.Key ? BasisValue.ToString(CultureInfo.InvariantCulture) : _callPayout;
-        private string _putPayout;
+        public string _putPayout;
         public string PutPayout => "payout" == SelectedBasis.Key ? BasisValue.ToString(CultureInfo.InvariantCulture) : _putPayout;
 
         private double CallNetProfit => string.IsNullOrEmpty(CallStake) || string.IsNullOrEmpty(CallPayout) ? double.NaN : Convert.ToDouble(CallPayout) - Convert.ToDouble(CallStake);
@@ -137,8 +151,17 @@ namespace BinaryClient.ViewModel
         private double PutReturn => string.IsNullOrEmpty(PutStake) ? double.NaN : PutNetProfit / Convert.ToDouble(PutStake);
         public string PutLabel => $"Stake: {SelectedCurrency.Value} {PutStake} Payout: {SelectedCurrency.Value} {PutPayout}\nNet profit: {SelectedCurrency.Value} {PutNetProfit.ToString(CultureInfo.InvariantCulture)} | Return: {PutReturn.ToString("P2", CultureInfo.InvariantCulture)}";
 
-        public string CallProposalId;
-        public string PutProposalId;
+        private static string _callProposalId;
+        public string CallProposalId {
+            get { return _callProposalId; }
+            set { _callProposalId = value; }
+        }
+
+        private static string _putProposalId;
+        public string PutProposalId {
+            get { return _putProposalId; }
+            set { _putProposalId = value; }
+        }
 
         public ObservableCollection<KeyValuePair<string, string>> CurrencyList { get; } = new ObservableCollection<KeyValuePair<string, string>>();
         private KeyValuePair<string, string> _selectedCurrency;

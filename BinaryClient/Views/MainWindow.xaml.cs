@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using BinaryClient.JSONTypes;
@@ -66,12 +68,43 @@ namespace BinaryClient.Views
             TextTime.Text = "";
             _watch.Start();
 
-//            ViewModel.PriceProposalRequest(contractType);
-
             foreach (var acc in MainWindowViewModel.Accounts.Where(m => m.Selected))
             {
+                var priceProposalRequest = new PriceProposalRequest
+                {
+                    proposal = 1,
+                    amount = ViewModel.BasisValue.ToString(CultureInfo.InvariantCulture),
+                    basis = ViewModel.SelectedBasis.Key,
+                    contract_type = contractType,
+                    currency = ViewModel.SelectedCurrency.Key,
+                    duration = ViewModel.Duration.ToString(),
+                    duration_unit = ViewModel.SelectedTimeUnit.Key,
+                    symbol = ViewModel.SelectedSymbol.symbol
+                    // TODO: date_start commented cause it should be tested more carefully
+                    // date_start = ViewModel.SelectedStartTime.Key !=0 ? ViewModel.SelectedStartTime.Key : (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
+                };
+                var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
+
+                acc.Bws.SendRequest(jsonPriceProposalRequest).Wait();
+                var jsonPriceProposalResponse = Task.Run(() => acc.Bws.StartListen()).Result;
+                var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
+
+                switch (contractType)
+                {
+                    case "CALL":
+                        ViewModel.CallDisplayValue = priceProposal.proposal != null ? priceProposal.proposal.display_value : string.Empty;
+                        ViewModel.CallProposalId = priceProposal.proposal != null ? priceProposal.proposal.id : string.Empty;
+                        break;
+                    case "PUT":
+                        ViewModel.PutDisplayValue = priceProposal.proposal != null ? priceProposal.proposal.display_value : string.Empty;
+                        ViewModel.PutProposalId = priceProposal.proposal != null ? priceProposal.proposal.id : string.Empty;
+                        break;
+                }
+
+
                 var price = "CALL" == contractType ? ViewModel.CallDisplayValue : ViewModel.PutDisplayValue;
                 var id = "CALL" == contractType ? ViewModel.CallProposalId : ViewModel.PutProposalId;
+
 
                 if ((string.IsNullOrEmpty(price)) || (string.IsNullOrEmpty(id))) continue;
                 await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
