@@ -66,29 +66,14 @@ namespace BinaryClient.Views
             TextTime.Text = "";
             _watch.Start();
 
-            var priceProposalRequest = new PriceProposalRequest
-            {
-                proposal = 1,
-                amount = TextPayout.Text,
-                basis = ComboBasis.SelectedValue.ToString(),
-                contract_type = contractType,
-                currency = ComboCurrency.Text,
-                duration = TextDuration.Text,
-                duration_unit = ComboTimeUnit.SelectedValue.ToString(),
-                symbol = ViewModel.SelectedSymbol.symbol
-                // TODO: date_start commented cause it should be tested more carefully
-//                date_start = ViewModel.SelectedStartTime.Key !=0 ? ViewModel.SelectedStartTime.Key : (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds
-            };
-            var jsonPriceProposalRequest = JsonConvert.SerializeObject(priceProposalRequest);
+//            ViewModel.PriceProposalRequest(contractType);
+
             foreach (var acc in MainWindowViewModel.Accounts.Where(m => m.Selected))
             {
-                await acc.Bws.SendRequest(jsonPriceProposalRequest);
-                var jsonPriceProposalResponse = await acc.Bws.StartListen();
-                var priceProposal = JsonConvert.DeserializeObject<PriceProposalResponse>(jsonPriceProposalResponse);
-                if (priceProposal.proposal == null) continue;
-                var id = priceProposal.proposal.id;
-                var price = priceProposal.proposal.display_value;
+                var price = "CALL" == contractType ? ViewModel.CallDisplayValue : ViewModel.PutDisplayValue;
+                var id = "CALL" == contractType ? ViewModel.CallProposalId : ViewModel.PutProposalId;
 
+                if ((string.IsNullOrEmpty(price)) || (string.IsNullOrEmpty(id))) continue;
                 await acc.Bws.SendRequest($"{{\"buy\":\"{id}\", \"price\": {price}}}");
                 var jsonBuy = await acc.Bws.StartListen();
             }

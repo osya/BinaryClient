@@ -9,41 +9,42 @@
     xmlns:viewModel="clr-namespace:BinaryClient.ViewModel"
     x:Class="BinaryClient.Views.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="382.8" Width="525">
+        Title="MainWindow" Height="382.8" Width="652.2">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
     <Grid Background="#FF333333">
-        <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="405,181,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
-        <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="405,236,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
-        <Button x:Name="ButtonAdd" Content="+ Add" HorizontalAlignment="Left" Margin="107,10,0,0" VerticalAlignment="Top" Width="75" Foreground="#ECECEC" Background="#252525" Click="ButtonAdd_Click"/>
-        <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="211,10,0,0" VerticalAlignment="Top" Width="75" 
+        <Button x:Name="ButtonCall" Content="CALL" HorizontalAlignment="Left" Margin="330,161,0,0" VerticalAlignment="Top" Width="67" Height="33" Click="buttonCall_Click" Background="#1DA716" Foreground="#DEF5DB" FontWeight="Bold"/>
+        <Button x:Name="ButtonPut" Content="PUT" HorizontalAlignment="Left" Margin="330,216,0,0" VerticalAlignment="Top" Width="67" Click="buttonPut_Click" Background="#D71A21" Foreground="#DEF5DB" FontWeight="Bold" Height="33"/>
+        <Button x:Name="ButtonAdd" Content="+ Add" HorizontalAlignment="Left" Margin="165,12,0,0" VerticalAlignment="Top" Width="75" Foreground="#ECECEC" Background="#252525" Click="ButtonAdd_Click"/>
+        <Button x:Name="ButtonRemove" Content="- Remove" HorizontalAlignment="Left" Margin="262,12,0,0" VerticalAlignment="Top" Width="75" 
 			Click="buttonRemove_Click" Foreground="#ECECEC" Background="#252525"/>
-        <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="322,10,0,0" VerticalAlignment="Top" Width="75" 
+        <Button x:Name="ButtonUpdate" Content="🔃 Update" HorizontalAlignment="Left" Margin="367,12,0,0" VerticalAlignment="Top" Width="75" 
 			Click="buttonUpdate_Click" Foreground="#ECECEC" Background="#252525"/>
-        <ComboBox x:Name="ComboMarket" ItemsSource="{Binding Path=MarketList}" DisplayMemberPath="name" SelectedValuePath="key" SelectedItem="{Binding Path=SelectedMarket}"
+        <ComboBox x:Name="ComboMarket" ItemsSource="{Binding Path=MarketList}" DisplayMemberPath="name" SelectedValuePath="key" SelectedItem="{Binding Path=SelectedMarket, Mode=TwoWay}"
                   HorizontalAlignment="Left" Margin="44,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboSymbol" ItemsSource="{Binding Path=SymbolList}" DisplayMemberPath="name" SelectedValuePath="symbol" SelectedItem="{Binding Path=SelectedSymbol}"
+        <ComboBox x:Name="ComboSymbol" ItemsSource="{Binding Path=SymbolList}" DisplayMemberPath="name" SelectedValuePath="symbol" SelectedItem="{Binding Path=SelectedSymbol,Mode=TwoWay}"
                   HorizontalAlignment="Left" Margin="195,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboStart" ItemsSource="{Binding Path=StartTimeList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedItem="{Binding Path=SelectedStartTime}"
+        <ComboBox x:Name="ComboStart" ItemsSource="{Binding Path=StartTimeList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedItem="{Binding Path=SelectedStartTime, Mode=TwoWay}"
                   HorizontalAlignment="Left" Margin="107,228,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <Label x:Name="Label" Content="Start Time" HorizontalAlignment="Left" Margin="38,225,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <ComboBox x:Name="ComboDuration" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False">
             <ComboBoxItem Name="Duration" IsSelected="True">Duration</ComboBoxItem>
             <ComboBoxItem Name="EndTime">End Time</ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="TextDuration" HorizontalAlignment="Left" Height="23" Margin="180,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
-        <ComboBox x:Name="ComboTimeUnit" ItemsSource="{Binding Path=TimeUnitList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="s"
-                  HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboBasis" ItemsSource="{Binding Path=BasisList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="payout" 
-                  HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="ComboCurrency" HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Name="Usd" IsSelected="True">USD</ComboBoxItem>
-        </ComboBox>
-        <TextBox x:Name="TextPayout" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="TextDuration" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" 
+                 Margin="180,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <ComboBox x:Name="ComboTimeUnit" ItemsSource="{Binding Path=TimeUnitList}" DisplayMemberPath="Value" SelectedValuePath="Key" 
+                  SelectedItem="{Binding Path=SelectedTimeUnit, Mode=TwoWay}" HorizontalAlignment="Left" Margin="247,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboBasis" ItemsSource="{Binding Path=BasisList}" DisplayMemberPath="Value" SelectedValuePath="Key" 
+                  SelectedItem="{Binding Path=SelectedBasis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="38,308,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="ComboCurrency" ItemsSource="{Binding Path=CurrencyList}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedItem="{Binding Path=SelectedCurrency, Mode=TwoWay}"
+                  HorizontalAlignment="Left" Margin="180,308,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextPayout" Text="{Binding Path=BasisValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="322,308,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
         <Label x:Name="LabelTime" Content="Time, ms" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
         <TextBox x:Name="TextTime" HorizontalAlignment="Left" Height="23" Margin="405,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67" IsReadOnly="True"/>
-        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="10,36,10.4,0" VerticalAlignment="Top" Height="104" Width="498" 
+        <DataGrid x:Name="DataAccounts" HorizontalAlignment="Center" Margin="24,36,20.8,0" VerticalAlignment="Top" Height="104" Width="572" 
                   CanUserAddRows="False" SourceUpdated="DataGrid_SourceUpdated" TargetUpdated="DataGrid_SourceUpdated" AutoGenerateColumns="False">
             <DataGrid.DataContext>
                 <model:Accounts/>
@@ -69,5 +70,7 @@
         </DataGrid>
         <Label x:Name="LabelSelected" Content="Selected: " HorizontalAlignment="Left" Margin="38,145,0,0" VerticalAlignment="Top" 
 			Foreground="#ECECEC" Background="#252525"/>
+        <Label x:Name="LabelCall" Content="{Binding Path=CallLabel, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="405,164,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
+        <Label x:Name="LabelPut" Content="{Binding Path=CallLabel, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="405,219,0,0" VerticalAlignment="Top" Foreground="#ECECEC"/>
     </Grid>
 </Window>

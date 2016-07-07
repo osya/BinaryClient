@@ -10,7 +10,7 @@
         public string duration { get; set; }
         public string duration_unit { get; set; }
         public string symbol { get; set; }
-        public int date_start { get; set; }
+//        public int date_start { get; set; }
     }
 
 
